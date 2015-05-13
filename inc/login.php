@@ -1,27 +1,13 @@
 <?php
-$time = microtime(true);
-session_start();
-
-require('conf.php');
-require('common.php');
-require('/inc/header.php');
-if($admin_user === '') || ($admin_password === '')
-{
-	$message = "Login not allowed, please set login details in conf file";
-	require('/inc/message.php');
-	require('/inc/footer.php');
-	exit;
-} 
-if(isset($_POST['username']) && isset($_POST['password']))
-{
-	if (($_POST['username'] == $admin_user) && ($_POST['password'] == $admin_password)) {
-		$_SESSION['admin'] = true;
-		$message = "Login successful, welcome to $admin_user";
-		require('/inc/message.php');
-		require('/inc/footer.php');
-		exit;
-
-	}
+if (isset($in_script)) {
+	exit('Not directly');
 }
-require('/inc/login.php');
-require('/inc/footer.php');
+?>
+<div class="box">
+	<p class="title">Admin login</p>
+	<form role="form" name="login" method="POST" action="login.php">
+      <input name="username" type="text" size="40" placeholder="Username....."/>
+      <input name="password" type="password" size="40" placehoder="Password" />
+      <input name="submit" value="Login" />		
+	</form>
+</div>
